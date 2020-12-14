@@ -18,6 +18,8 @@
 		} else {
 			hint.classList.remove(`${CONFIG.class.hint}--show`);
 		}
+		searchValueInput.value = '';
+		searchValueInput.focus();
 	};
 
 	const init = (hintMode) => {

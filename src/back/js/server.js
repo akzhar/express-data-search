@@ -44,7 +44,7 @@ function serverRun() {
 	server.get('/ad-users', (req, res) => {
 		const {query, mode, rusonly} = req.query;
 		const scope = (rusonly) ? 'rus' : 'group';
-		const ad = getADinstance(`${scope}-limited`); // limited - только имя и почта
+		const ad = getADinstance(scope);
 		const filter = defineLdapFilter(mode, query);
 		ad.findUsers(filter, (error, users) => {
 			if (error) {
@@ -52,7 +52,12 @@ function serverRun() {
 			} else if (!users) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				res.render('page-users', { users, rusonly, hostName, title: `Список аккаунтов по запросу '${query}'` });
+				if (users.length === 1) {
+					const user = users[0];
+					res.render('page-user', { user, rusonly, hostName, utilsFunc: { validator, uacDecoder, managerParser, converter, cnParser } });
+				} else {
+					res.render('page-users', { users, rusonly, hostName, title: `Список аккаунтов по запросу '${query}'` });
+				}
 			}
 			log(`AD users query: ${query}`);
 		});

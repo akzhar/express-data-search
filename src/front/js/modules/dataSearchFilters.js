@@ -199,6 +199,7 @@
 		window.addEventListener('keydown', (evt) => {
 			if(evt.key === 'Enter') onSearchBtnClick();
 		});
+		searchValueInput.focus();
 	};
 
 	window.exports.dataSearchFilters = { init }; 
