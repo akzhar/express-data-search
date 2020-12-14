@@ -5,7 +5,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "json-server": "json-server --watch \\\\group.wan\\dfs-rus\\ForOtherDep\\IT\\Node.js\\data\\data.json --port 3004",
+    "json-server": "json-server --watch \\\\ru-kom1-d000\\Public\\Node.js\\data\\data.json --port 3004 --host ru-kom1-w171",
     "build": "gulp build",
     "watch": "gulp watch",
     "serve": "cd build\\back\\js && node server.js",

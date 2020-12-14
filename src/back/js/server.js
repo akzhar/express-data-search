@@ -1,5 +1,4 @@
 const fs = require('fs');
-const env = JSON.parse(fs.readFileSync('../.env.json', 'utf8'));
 const path = require('path');
 const express = require('express');
 const server = express();
@@ -14,9 +13,9 @@ const converter = require('./utils/converter.js');
 const cnParser = require('./utils/cn-parser.js');
 const adConfig = require('./utils/ad-config.js');
 const log = require('./utils/log.js');
-const hostname = require('./utils/localhost.js');
+const ip = require('./utils/ip.js');
 
-const {PORT} = JSON.parse(fs.readFileSync('../.env.json', 'utf8'));
+const {HOST_NAME: hostName, PORT: port} = JSON.parse(fs.readFileSync('../.env.json', 'utf8'));
 const FRONT_FILES_PATH = '../../front';
 const LDAP_FILTER = {
 	users: '(|(objectClass=user)(objectClass=person))',
@@ -53,7 +52,7 @@ function serverRun() {
 			} else if (!users) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				res.render('page-users', { users, rusonly, hostName: env.HOST_NAME, title: `Список аккаунтов по запросу '${query}'` });
+				res.render('page-users', { users, rusonly, hostName, title: `Список аккаунтов по запросу '${query}'` });
 			}
 			log(`AD users query: ${query}`);
 		});
@@ -68,7 +67,7 @@ function serverRun() {
 			} else if (!user) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				res.render('page-user', { user, rusonly, hostName: env.HOST_NAME, utilsFunc: { validator, uacDecoder, managerParser, converter, cnParser } });
+				res.render('page-user', { user, rusonly, hostName, utilsFunc: { validator, uacDecoder, managerParser, converter, cnParser } });
 			}
 			log(`AD user query: ${query}`);
 		});
@@ -81,7 +80,7 @@ function serverRun() {
 			if (error) {
 				res.render('page-error', { error });
 			} else {
-				res.render('page-groups', { query, rusonly, groups, hostName: env.HOST_NAME });
+				res.render('page-groups', { query, rusonly, groups, hostName });
 			}
 		});
 		log(`AD groups query: ${query}`);
@@ -96,7 +95,7 @@ function serverRun() {
 			} else if (!users) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				res.render('page-users', { users, rusonly, title: `Состав группы ${query} (в т.ч. из вложенных групп)` });
+				res.render('page-users', { users, rusonly, hostName, title: `Состав группы ${query} (в т.ч. из вложенных групп)` });
 			}
 			log(`AD group query: ${query}`);
 		});
@@ -110,7 +109,7 @@ function serverRun() {
 			if (error) {
 				res.render('page-error', { error });
 			} else {
-				res.render('page-qr', { user, hostName: env.HOST_NAME, utilsFunc: { cnParser } });
+				res.render('page-qr', { user, hostName, utilsFunc: { cnParser } });
 			}            
 		});
 		log(`QR contact query: ${query}`);
@@ -126,7 +125,7 @@ function serverRun() {
 			} else if (!results) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				res.render('page-computers', { computers: results.other, hostName: env.HOST_NAME, utilsFunc: { converter } });
+				res.render('page-computers', { computers: results.other, hostName, utilsFunc: { converter } });
 			}
 		});
 		log(`Computers query: ${query}`);
@@ -136,7 +135,7 @@ function serverRun() {
 	server.get('/ad-users/json', (req, res) => {
 		const {scope} = req.query;
 		const ad = getADinstance(scope);
-		const mode = 'mail'; // все у кого есть mail
+		const mode = 'account-by-mail'; // все у кого есть mail
 		const query = '*';
 		const filter = defineLdapFilter(mode, query);
 		ad.findUsers(filter, (error, users) => {
@@ -150,8 +149,8 @@ function serverRun() {
 		});
 		log(`1C users query: ${query}`);
 	});
-	server.listen(PORT);
-	log(`Server running at http://${hostname}:${PORT}`);
+	server.listen(port);
+	log(`Server running at http://${ip}:${port}`);
 	log('===============================================================', false);
 }
 
