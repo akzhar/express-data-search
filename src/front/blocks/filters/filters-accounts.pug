@@ -1,0 +1,14 @@
+﻿include ../radio/radio.pug
+include ../checkbox/checkbox.pug
+
+form(class='filters' action='ad-users' method='get')
+	div(class='filters__wrapper' id='mode-selector')
+		h3(class='filters__label') Режим поиска
+		+radio([{id: 'mode-name', name: 'mode', value: 'account-by-name', label: 'Поиск по имени (cn)', checked: true},
+				{id: 'mode-mail', name: 'mode', value: 'account-by-mail', label: 'Поиск по почте (mail)', checked: false},
+				{id: 'mode-ldap', name: 'mode', value: 'account-by-ldap', label: 'Расширенный поиск (LDAP фильтр)', checked: false}])
+	div(class='filters__wrapper')
+		label(class='filters__label' for='search-value' id='search-value-header')
+		input(type='text' name='query' placeholder='' id='search-value')
+		+checkbox({title: 'искать только по OU России', name: "rusonly", checked: true}) 
+		input(class='btn btn--search' type='submit' title='Искать' value='' disabled=true)

@@ -1,0 +1,37 @@
+.hint
+	display none
+	margin 0
+	font-size 0.8rem
+	line-height 0.8rem
+
+	&--show
+		display block
+
+	&__img
+		fill color__green
+
+	&__label
+		margin 30px 0 15px 0
+		font inherit
+		font-weight bold
+		text-transform uppercase
+
+	& p
+		margin 0 0 15px 0
+
+	&__word--red
+		color color__red
+
+	&__word--green
+		color color__green
+
+	&__word--blue
+		color color__lightblue
+
+	&__word--comment
+		color color__grey
+
+@media(min-width: width__desktop)
+	.hint
+		font-size 1rem
+		line-height 1rem			

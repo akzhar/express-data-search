@@ -1,0 +1,24 @@
+include ../blocks/header/header.pug
+include ../blocks/head/head.pug
+include ../blocks/link/link-img.pug
+
+doctype html
+html(lang='ru')
+	+head('Список аккаунтов | SK Russia')
+	body
+		div(style='display: none')
+			include ../../front/img/sprite.min.svg
+		div(class='page page--users')
+			+header(title)
+			section(class='section')
+				div
+					h2(class='section__head')=`Результаты поиска - [${users.length}]`
+					div(class='section__hints')
+						+link-img(hostName)
+					ul(class='section__content results results--show')
+						each user, index in users
+							li(class='results__item item')
+								h3(class='item__head')
+									span=`${index + 1}. `
+									a(class='item__link link' href=`/ad-user?${rusonly ? 'rusonly=on&' : ''}query=${user.sAMAccountName}` title='Открыть карточку аккаунта')=`group\\${user.sAMAccountName}`
+

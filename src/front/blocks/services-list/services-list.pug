@@ -1,0 +1,5 @@
+- var pages = locals['pages'];
+
+ul(class='services-list')
+	each page, key in pages 
+		li: a(class='link' href=page.href)=page.description

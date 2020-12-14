@@ -1,0 +1,23 @@
+include ../blocks/header/header.pug
+include ../blocks/head/head.pug
+include ../blocks/link/link-img.pug
+
+doctype html
+html(lang='ru')
+	+head(`Компьютеры | SK Russia`)
+	body
+		div(style='display: none')
+			include ../../front/img/sprite.min.svg
+		div(class='page page--computer')
+			+header(`Компьютеры`)
+			section(class='section')
+				div
+					h2(class='section__head')=`Результаты поиска - [${computers.length}]`
+					div(class='section__hints')
+						+link-img(hostName)
+					ul(class='section__content results results--show')
+						each computer, index in computers
+							li(class='results__item item')
+								h3(class='item__head')!=`<span>${index + 1}.</span> ${computer.cn}`
+								p(class='item__property')!=`<b>Владелец: </b>${computer.description ? computer.description : 'empty'}`
+								p(class='item__property')!=`<b>Компьютер создан:</b> ${utilsFunc.converter.dateToString(utilsFunc.converter.timeStampToDate(computer.whenCreated))}`

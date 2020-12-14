@@ -1,0 +1,4 @@
+mixin checkbox(options)
+	div(class='checkbox')
+		input(type='checkbox' id='checkbox' name=options.name checked=options.checked)
+		label(class='checkbox__label' for='checkbox')=options.title

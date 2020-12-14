@@ -1,0 +1,28 @@
+include ./blocks/header/header.pug
+include ./blocks/nav/nav.pug
+include ./blocks/head/head.pug
+
+- var pageName = 'phones';
+- var pageDescription = locals['pages'][pageName].description;
+
+doctype html
+html(lang='ru')
+	+head(`${pageDescription} | SK Russia`)
+	body(data-pagename=`${pageName}`)
+		div(style='display: none')
+			include ../../build/front/img/sprite.min.svg
+		div(class=`page page--${pageName}`)
+			+header(pageDescription)
+			+nav(pageName)
+			section(class='section')
+				div
+					h2(class='section__head') Фильтры
+					div(class='section__content')
+						include ./blocks/filters/filters-phones.pug 
+			section(class='section')
+				h2(class='section__head' id='results-header') Результаты поиска
+				div(class='section__hints' id='section-hints')
+				include ./blocks/hint/hint.pug
+				include ./blocks/loader/loader.pug
+				include ./blocks/results/results.pug
+		script(src='js/script.min.js')

@@ -1,0 +1,104 @@
+div(class='hint' id='hint')
+	h3(class='hint__label') Одно условие
+	p
+		b(class='hint__word--red') (
+		| cn
+		span(class='hint__word--green') =
+		| lozh
+		span(class='hint__word--blue') *
+		b(class='hint__word--red') )
+		span(class='hint__word--comment')  // все учетки, где cn начинается с lozh
+
+	p
+		b(class='hint__word--red') (
+		| givenName
+		span(class='hint__word--green') =
+		| olga
+		b(class='hint__word--red') )
+		span(class='hint__word--comment')  // все учетки, где givenName является olga
+	p
+		b(class='hint__word--red') (
+		| extensionAttribute1
+		span(class='hint__word--green') =
+		| Service Account
+		b(class='hint__word--red') )
+		span(class='hint__word--comment')  // все сервисные учетки
+	p
+		b(class='hint__word--red') (
+		| extensionAttribute15
+		span(class='hint__word--green') =
+		| RU001
+		b(class='hint__word--red') )
+		span(class='hint__word--comment')  // все учетки RU001
+	p
+		b(class='hint__word--red') (
+		| department
+		span(class='hint__word--green') =
+		| sales
+		b(class='hint__word--red') )
+		span(class='hint__word--comment')  // все учетки, где department указан как sales
+	
+	h3(class='hint__label') Несколько условий (И)
+	p
+		b(class='hint__word--red') (
+		| extensionAttribute1
+		span(class='hint__word--green') =
+		| End User - External
+		b(class='hint__word--red') )
+		b(class='hint__word--red') (
+		| extensionAttribute15
+		span(class='hint__word--green') =
+		| RU003
+		b(class='hint__word--red') )
+		span(class='hint__word--comment')  // все 3rd party учетки RU003
+	
+	h3(class='hint__label') Несколько условий (ИЛИ)
+	p
+		b(class='hint__word--red') (
+		span(class='hint__word--blue') |
+		b(class='hint__word--red') (
+		| sn
+		span(class='hint__word--green') =
+		| taov
+		b(class='hint__word--red') )
+		b(class='hint__word--red') (
+		| sn
+		span(class='hint__word--green') =
+		| paisin
+		b(class='hint__word--red') )
+		b(class='hint__word--red') )
+		span(class='hint__word--comment')  // все учетки с фамилией Taov или Paisin
+	
+	h3(class='hint__label') Отрицание (НЕ)
+	p
+		b(class='hint__word--red') (
+		span(class='hint__word--blue') !
+		b(class='hint__word--red') (
+		| extensionAttribute1
+		span(class='hint__word--green') =
+		| Generic Account
+		b(class='hint__word--red') )
+		b(class='hint__word--red') )
+		span(class='hint__word--comment')  // все учетки кроме Generic
+	p
+		b(class='hint__word--red') (
+		| givenName
+		span(class='hint__word--green') =
+		| igor
+		b(class='hint__word--red') )
+		b(class='hint__word--red') (
+		span(class='hint__word--blue') !
+		b(class='hint__word--red') (
+		| sn
+		span(class='hint__word--green') =
+		| egorov
+		b(class='hint__word--red') )
+		b(class='hint__word--red') )
+		span(class='hint__word--comment')  // все учетки c именем Igor, кроме Egorov
+	
+	h3(class='hint__label') Примечания
+	p Максимум будет показано 1000 аккаунтов
+	p
+		b(class='hint__word--red') ( 
+		b(class='hint__word--red') )
+		|  Скобки обязательны

@@ -1,0 +1,51 @@
+.nav
+	padding 6px 40px
+	min-height 14px
+	background-color rgba(37, 124, 193, 0.3)
+
+	&__wrapper
+		display flex
+
+	&__link
+		position relative
+		margin 0 30px 0 0
+		font-size 0.8rem
+		line-height 0.8rem
+
+		&::before,
+		&::after
+			position: absolute
+			left -18px
+			content ""
+			width 6px
+			height 1px
+			background-color color__brand
+
+		&::before
+			top 36%
+			transform rotate(45deg)
+
+		&::after
+			bottom 36%
+			transform rotate(-45deg)
+
+		&:first-child::before,
+		&:first-child::after
+			display none
+
+		&:last-child
+			margin 0
+
+.page--accounts .nav__link--accounts,
+.page--phones .nav__link--phones,
+.page--computers .nav__link--computers,
+.page--printers .nav__link--printers
+	color color__brand
+	pointer-events none
+
+@media(min-width: width__desktop)
+	.nav
+
+		&__link
+			font-size 1rem
+			line-height 1rem

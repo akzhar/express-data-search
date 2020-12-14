@@ -1,0 +1,32 @@
+.header
+	padding 20px 40px
+	background linear-gradient(90deg, rgba(37, 124, 193, 0.6) 0%, rgba(37, 124, 193, 0.2) 100%)
+
+	&__wrapper
+		display flex
+		flex-wrap wrap
+		justify-content center
+		align-items center
+
+	&__link
+		display flex
+
+	&__logo
+		align-self center
+		margin 0 15px 0 0
+
+	&__head
+		margin 0
+		font-size 1rem
+		line-height 1rem
+
+.page--index .header__link
+	color color__brand
+	pointer-events none
+
+@media(min-width: width__desktop)
+	.header
+
+		&__head
+			font-size 1.6rem
+			line-height 1.6rem

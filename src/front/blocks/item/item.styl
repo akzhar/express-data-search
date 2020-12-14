@@ -1,0 +1,45 @@
+.item
+	padding 5px
+	background-color white
+	font-size 0.8rem
+	line-height 0.8rem
+
+	&__head
+		margin 0 0 10px 0
+		font-weight normal
+
+	&__property
+		margin 0 0 10px 0
+
+		&--center
+			text-align center
+
+		&:last-child
+			margin 0
+
+	&__btns-wrapper
+		display flex
+		flex-wrap wrap
+		margin 5px 0
+
+	&__search-btn
+		display block
+		margin 0 10px 10px 0
+
+		&:last-child
+			margin 0
+
+	&__qrcode
+		display block
+		margin 0 auto
+
+.page--users .item__head
+	margin 0
+
+@media(min-width: width__desktop)
+	.item
+		font-size 1rem
+		line-height 1rem
+		
+		&__search-btn
+			margin-bottom 0

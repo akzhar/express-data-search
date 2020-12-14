@@ -1,0 +1,21 @@
+div(class='filters')
+	div(class='filters__wrapper')
+		label(class='filters__label' for='plant-select') Завод
+		select(id='plant-select')
+			option(value='VSE') Всеволожск
+			option(value='KOM', selected=true) Коммунар
+			option(value='MOS') Москва
+	div(class='filters__wrapper')
+		label(class='filters__label' for='search-param-select') Параметр
+		select(id='search-param-select')
+			option(value='Расположение', selected=true) Расположение
+			option(value='Модель') Модель
+			option(value='Имя') Имя
+			option(value='Цветной') Цветной?
+	div(class='filters__wrapper')
+			label(class='filters__label' for='search-value-input') Значение
+			input(list='search-value-datalist' id='search-value-input' placeholder='Впиши значение...')
+			datalist(id='search-value-datalist')
+				// script will put the options here
+	div(class='filters__wrapper filters__wrapper--center')
+		button(class='btn btn--search' id='search-btn' title='Искать')

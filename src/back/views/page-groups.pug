@@ -1,0 +1,24 @@
+include ../blocks/header/header.pug
+include ../blocks/head/head.pug
+include ../blocks/link/link-img.pug
+
+doctype html
+html(lang='ru')
+	+head(`${query} | Список AD групп | SK Russia`)
+	body
+		div(style='display: none')
+			include ../../front/img/sprite.min.svg
+		div(class='page page--groups')
+			+header(`Список AD групп ${query}`)
+			section(class='section')
+				div
+					h2(class='section__head')=`Результаты поиска - [${groups.length}]`
+					div(class='section__hints')
+						+link-img(hostName)  
+					ul(class='section__content results results--show')
+						each group, index in groups
+							li(class='results__item item')
+								h3(class='item__head')
+									span=`${index + 1}. ` 
+									a(class='link' href=`/ad-group?${rusonly ? 'rusonly=on&' : ''}query=${group.cn}` title='Состав данной группы')=`${group.cn}`
+								p(class='item__property')!=`<b>Description:</b> ${(group.description === undefined) ? 'empty' : group.description}`

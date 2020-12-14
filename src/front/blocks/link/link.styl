@@ -1,0 +1,41 @@
+.link
+	text-decoration none
+	text-transform uppercase
+	color white
+	font-size 0.8rem
+	line-height 0.8rem
+
+	&--img
+		display flex
+		align-items center
+		margin 0 0 12px 10px
+		color color__brand
+		font-size 0.6rem
+		line-height 0.6rem
+
+		&:first-child
+			margin-left 0
+
+		& svg
+			fill color__brand
+			margin 0 0 0 6px
+		
+	&:hover
+		text-decoration underline
+		opacity 0.8
+
+	&:active
+		text-decoration none
+		opacity 0.3
+
+.item .link
+	color color__brand
+	
+@media(min-width: width__desktop)
+	.link
+		font-size 1rem
+		line-height 1rem
+
+	.section__head .link
+		font-size 0.7rem
+		line-height 0.7rem

@@ -1,0 +1,36 @@
+.btn
+	padding 8px
+	border 1px solid color__brand
+	background-color color__brand
+	color white
+	font inherit
+	text-decoration none
+	text-transform uppercase
+	text-align center
+	border-radius 6px
+
+	&--search {
+		background url('../img/search.svg') color__green no-repeat center
+		border-color color__green
+		background-size 100% 60%
+		width 100px
+		height 26px
+		transition all 0.5s ease
+		opacity 0.6
+	}
+
+	&:disabled {
+		border 1px solid color__grey
+		background-color color__grey
+		background-size 100% 50%
+		width 90px
+	}
+
+	&:hover:not(:disabled)
+		cursor pointer
+		opacity 0.8
+
+	&:active:not(:disabled)
+		transform translateY(2px)
+		opacity 0.6
+		transition 0s

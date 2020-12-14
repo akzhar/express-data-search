@@ -1,0 +1,43 @@
+.checkbox
+	position relative
+	display flex
+	margin 20px 0
+	font-size 0.6rem
+	line-height 0.6rem
+
+	& input[type="checkbox"]
+		display none
+
+	&__label
+		margin 0
+		padding 0 0 0 25px
+		text-transform uppercase
+
+	&__label::after
+		position absolute
+		top 50%
+		left 0
+		transform translate(0, -50%)
+		content ""
+		width 14px
+		height 14px
+		background white
+
+	& input[type="checkbox"]:checked + .checkbox__label::after
+		background color__brand url("../img/tick.svg") no-repeat center
+		transition all 0.5s ease
+
+	&:hover .checkbox__label
+		opacity 0.8
+
+	&:active .checkbox__label
+		opacity 0.6
+
+	&:hover .checkbox__label,
+	&:hover
+		cursor pointer
+
+@media(min-width: width__desktop)
+	.checkbox
+		font-size 0.8rem
+		line-height 0.8rem

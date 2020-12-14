@@ -1,0 +1,17 @@
+include ../blocks/header/header.pug
+include ../blocks/head/head.pug
+
+doctype html
+html(lang='ru')
+	+head('Ошибка | SK Russia')
+	body
+		div(style='display: none')
+			include ../../front/img/sprite.min.svg
+		div(class='page page--error')
+			+header('Ошибка')
+			section(class='section')
+				div
+					h2(class='section__head') Упс, что-то пошло не так... &#128557
+					div(class='section__hints')
+						include ../blocks/link/link-img.pug
+					p!=`<b>Error message:</b> ${error}`

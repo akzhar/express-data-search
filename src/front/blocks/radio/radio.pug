@@ -1,0 +1,6 @@
+mixin radio(radioList)
+	ul(class='radio')
+		each radio in radioList
+			li(class='radio__item')
+				input(type='radio' id=radio.id name=radio.name value=radio.value checked=radio.checked)
+				label(for=radio.id)=radio.label

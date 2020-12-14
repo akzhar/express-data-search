@@ -1,0 +1,58 @@
+.radio
+	display flex
+	font-size 0.6rem
+	line-height 0.6rem
+
+	&__item
+		display flex
+		position relative
+		margin 0 15px 0 0
+
+		&:last-child
+			margin 0
+
+		& label
+			padding 0 0 0 25px
+			cursor pointer
+			text-transform uppercase
+		
+		& label::before
+		& label::after
+			position absolute
+			content ''
+			top 50%
+			transform translate(0, -50%)
+			border-radius 50%
+			background-color white
+
+		& label::before
+			left 0
+			width 14px
+			height 14px
+
+		& label::after
+			left 2px
+			width 10px
+			height 10px
+
+		& input[type="radio"]
+			display none
+
+		& input[type="radio"]:checked + label::after
+			background color__brand
+			transition all 0.4s ease
+
+		&:hover input[type="radio"]:not(:checked) + label
+			opacity 0.8
+
+		&:active input[type="radio"]:not(:checked) + label
+			opacity 0.6
+
+@media(min-width: width__desktop)
+	.radio
+		display block
+		font-size 0.8rem
+		line-height 0.8rem
+
+		&__item
+			margin 0 0 15px 0

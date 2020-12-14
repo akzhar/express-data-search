@@ -1,0 +1,14 @@
+include ./blocks/header/header.pug
+include ./blocks/head/head.pug
+
+doctype html
+html(lang='ru')
+	+head('Сервисы | SK Russia')
+	body
+		div(class='page page--index')
+			+header('Сервисы')
+			section(class='section')
+				div
+					h2(class='section__head') Доступные сервисы
+					div(class='section__content')
+						include ./blocks/services-list/services-list.pug

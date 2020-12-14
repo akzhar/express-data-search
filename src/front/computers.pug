@@ -1,0 +1,21 @@
+include ./blocks/header/header.pug
+include ./blocks/nav/nav.pug
+include ./blocks/head/head.pug
+
+- var pageName = 'computers';
+- var pageDescription = locals['pages'][pageName].description;
+
+doctype html
+html(lang='ru')
+	+head(`${pageDescription} | SK Russia`)
+	body(data-pagename=`${pageName}`)
+		div(class=`page page--${pageName}`)
+			+header(pageDescription)
+			+nav(pageName)
+			section(class='section')
+				div
+					h2(class='section__head') Фильтры
+					div(class='section__content')
+						include ./blocks/filters/filters-computers.pug
+						include ./blocks/hint/hint-computers.pug
+		script(src='js/script.min.js')

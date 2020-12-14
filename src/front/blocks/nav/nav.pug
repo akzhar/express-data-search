@@ -1,0 +1,9 @@
+- var pages = locals['pages'];
+
+mixin nav(pageName)
+	nav(class='nav')
+		div(class='nav__wrapper')
+			a(class='nav__link link nav__link--services' href="index.html") Сервисы
+			each page, key in pages
+				unless (key !== pageName) 
+					a(class=`nav__link link nav__link--${key}` href=page.href)=page.description
