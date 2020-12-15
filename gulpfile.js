@@ -132,10 +132,13 @@ lazyRequireTask('babel', './gulp_tasks/babel.js', {
 lazyRequireTask('js', './gulp_tasks/js.js', {
 	src: [
 		`${ADDRESS.temp}config.js`,
+		`${ADDRESS.temp}nodes.js`,
 		`${ADDRESS.temp}utils.js`,
+		`${ADDRESS.temp}render.js`,
 		`${ADDRESS.temp}xhr.js`,
-		`${ADDRESS.temp}dataSearchFilters.js`, // модуль активации фильтров для поиска в JSON
-		`${ADDRESS.temp}adSearchFilters.js`, // модуль активации фильтров для поиска в AD
+		`${ADDRESS.temp}printers.js`,
+		`${ADDRESS.temp}phones.js`, 
+		`${ADDRESS.temp}ad.js`, 
 		`${ADDRESS.temp}index.js`
 	],
 	dest: `${ADDRESS.build.front.js}`,

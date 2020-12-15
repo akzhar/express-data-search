@@ -1,26 +1,6 @@
 div(class='filters')
 	div(class='filters__wrapper')
-		label(class='filters__label' for='plant-select') Завод
-		select(id='plant-select')
-			option(value='VSE', selected=true) Всеволожск
-			option(value='KOM') Коммунар
-			option(value='MOS') Москва
-	div(class='filters__wrapper')
-		label(class='filters__label' for='search-param-select') Параметр
-		select(id='search-param-select')
-			option(value='Отдел') Отдел
-			option(value='Описание') Описание
-			option(value='ФИО', selected=true) ФИО
-			option(value='Стационарный') Стационарный
-			option(value='Короткий стационарный') Короткий стационарный
-			option(value='Факс') Факс
-			option(value='Мобильный') Мобильный
-			option(value='Короткий мобильный') Короткий мобильный
-			option(value='DECT/CISCO') DECT/CISCO
-	div(class='filters__wrapper')
-			label(class='filters__label' for='search-value-input') Значение
-			input(list='search-value-datalist' id='search-value-input' placeholder='Впиши значение...')
-			datalist(id='search-value-datalist')
-				// script will put the options here
+			label(class='filters__label' for='search-value-input') Найти контакт
+			input(type='text' id='search-value-input' placeholder='Фамилия, отдел, должность, телефон...')
 	div(class='filters__wrapper filters__wrapper--center')
 		button(class='btn btn--search' id='search-btn' title='Искать')

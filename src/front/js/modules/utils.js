@@ -21,6 +21,17 @@
 		return arr.filter((el) => Object.prototype.hasOwnProperty.call(obj, el[fieldName]) ? false : obj[el[fieldName]] = true);
 	};
 
+	const getFilteredData = (data, fieldName, dataToSearch) => { // ф-ция фильтрует массив данных data: ищет dataToSearch в поле fieldName
+		return data.filter(item => {
+			const dataField = item[fieldName];
+			if (Array.isArray(dataField)) {
+				return dataField.some(item => item.toLowerCase().includes(dataToSearch));
+			} else {
+				return dataField.toLowerCase().includes(dataToSearch);
+			}
+		});
+	};
+
 	const formatMobNo = (mobNo) => { // ф-ция форматирует номер мобильного телефона для печати
 		const tt = mobNo.split('');
 		if(mobNo.length === 12) {
@@ -45,5 +56,5 @@
 		return (Array.isArray(mobNoField)) ? mobNoField.map(mobNo => `<a href="tel:${mobNo}">${formatMobNo(mobNo)}</a>`).join(' , ') : `<a href="tel:${mobNoField}">${formatMobNo(mobNoField)}</a>`;
 	};
 
-	window.exports.utils = { debounce, removeChilds, getUniqArrayByFieldname, formatDataField, formatMobNoField };
+	window.exports.utils = { debounce, removeChilds, getUniqArrayByFieldname, getFilteredData, formatDataField, formatMobNoField };
 })();

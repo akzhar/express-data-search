@@ -19,7 +19,8 @@
 		class: {
 			hint: 'hint',
 			loader: 'loader',
-			results: 'results'
+			results: 'results',
+			property: 'item__property'
 		},
 		modeToText: {
 			'account-by-name':  {header: 'Поиск по имени (cn)', placeholder: 'cn (можно только часть)'},
