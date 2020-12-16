@@ -53,7 +53,7 @@
 	};
 
 	const formatMobNoField = (mobNoField) => { // ф-ция форматирует значение / массив значений мобильных номеров для печати
-		return (Array.isArray(mobNoField)) ? mobNoField.map(mobNo => `<a href="tel:${mobNo}">${formatMobNo(mobNo)}</a>`).join(' , ') : `<a href="tel:${mobNoField}">${formatMobNo(mobNoField)}</a>`;
+		return (Array.isArray(mobNoField)) ? mobNoField.map(mobNo => `<a href="tel:${mobNo}" class="${CONFIG.class.link}">${formatMobNo(mobNo)}</a>`).join(' , ') : `<a href="tel:${mobNoField}" class="${CONFIG.class.link}">${formatMobNo(mobNoField)}</a>`;
 	};
 
 	window.exports.utils = { debounce, removeChilds, getUniqArrayByFieldname, getFilteredData, formatDataField, formatMobNoField };

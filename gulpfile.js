@@ -134,6 +134,7 @@ lazyRequireTask('js', './gulp_tasks/js.js', {
 		`${ADDRESS.temp}config.js`,
 		`${ADDRESS.temp}nodes.js`,
 		`${ADDRESS.temp}utils.js`,
+		`${ADDRESS.temp}qr.js`,
 		`${ADDRESS.temp}render.js`,
 		`${ADDRESS.temp}xhr.js`,
 		`${ADDRESS.temp}printers.js`,

@@ -18,9 +18,15 @@
 		},
 		class: {
 			hint: 'hint',
+			hintImg: 'hint__img',
+			link: 'link',
 			loader: 'loader',
 			results: 'results',
-			property: 'item__property'
+			resultsItem: 'results__item',
+			item: 'item',
+			itemHead: 'item__head',
+			property: 'item__property',
+			qrLink: 'item__qrlink'
 		},
 		modeToText: {
 			'account-by-name':  {header: 'Поиск по имени (cn)', placeholder: 'cn (можно только часть)'},
@@ -28,9 +34,31 @@
 			'account-by-ldap': {header: 'Расширенный поиск (LDAP фильтр)', placeholder: '(givenName=*)(sn=*)'},
 			'computer-by-name':  {header: 'Поиск по имени (cn)', placeholder: 'cn (можно только часть)'},
 			'computer-by-owner': {header: 'Поиск по владельцу (description)', placeholder: 'sAMAccountName (можно только часть)'}
-    
+
+		},
+		dataFieldNames: {
+			phones: {
+				plant: 'Завод',
+				dept: 'Отдел',
+				fio: 'ФИО',
+				description: 'Описание',
+				internal: 'Внутренний стационарный',
+				external: 'Городской',
+				mobFull: 'Полный мобильный',
+				mobShort: 'Короткий мобильный',
+				dect: 'DECT/CISCO',
+				fax: 'Факс'
+			},
+			printers: {
+				ip: 'IP',
+				name: 'Имя',
+				model: 'Модель',
+				area: 'Расположение',
+				isColor: 'Цветной'
+			}
 		},
 		hostName: 'ru-kom1-w171',
+		qrSize: 500,
 		faceSad: '&#128557',
 		debounceInterval: 500,
 		searchTimeout: 250,
