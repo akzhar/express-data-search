@@ -1,6 +1,5 @@
 include ../blocks/header/header.pug
 include ../blocks/head/head.pug
-include ../blocks/link/link-img.pug
 
 - const initials = utilsFunc.cnParser(String(user.cn));
 - const password = utilsFunc.validator.password(user);
@@ -17,7 +16,7 @@ html(lang='ru')
 				div
 					h2(class='section__head') Результаты поиска
 					div(class='section__hints')
-						+link-img(hostName)  
+						include ../blocks/hint/hint-back-btns.pug
 					ul(class='section__content results results--show')
 						li(class='results__item item')
 							h3(class='item__head')=`group\\${user.sAMAccountName}`
@@ -36,5 +35,4 @@ html(lang='ru')
 							p(class='item__property')!=`<b>Руководитель:</b> ${(user.manager) ? utilsFunc.managerParser(user.manager) : ''}`
 							div(class='item__btns-wrapper')
 								a(class='item__search-btn btn' href=`/ad-groups?query=${user.sAMAccountName}`) Список AD групп
-								a(class='item__search-btn btn' href=`/qr-contact?${rusonly ? 'rusonly=on&' : ''}query=${user.sAMAccountName}`) Контактные данные
 								a(class='item__search-btn btn' href=`/computers?${rusonly ? 'rusonly=on&' : ''}mode=computer-by-owner&query=${initials.name.slice(0, 1)}${initials.surname}`) Компьютер пользователя

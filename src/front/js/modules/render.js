@@ -70,6 +70,7 @@
 	const showLoadingMsg = () => { // ф-ция-обработчик клика на кнопку поиска
 		nodes.resultsContainer.classList.remove(`${CONFIG.class.results}--show`);
 		nodes.hint.classList.remove(`${CONFIG.class.hint}--show`);
+		if (nodes.hintInstruction) nodes.hintInstruction.classList.remove(`${CONFIG.class.hint}--show`);
 		utils.removeChilds(nodes.resultsContainer);
 		nodes.resultsHeader.textContent = 'Подождите...';
 		nodes.loader.classList.add(`${CONFIG.class.loader}--show`);
@@ -86,7 +87,7 @@
 			nodes.resultsContainer.classList.add(`${CONFIG.class.results}--show`);
 			nodes.resultsHeader.innerHTML = `Результаты поиска - [ ${results.length} ]`;
 			if (pageName === 'printers') {
-				nodes.sectionHints.innerHTML = `<a href="${CONFIG.url.instruction}" class="${CONFIG.class.link} ${CONFIG.class.link}--img" target="blank" title="Открыть инструкцию"><span>Как подключить</span><svg width="14" height="14"><use xlink:href="#printer"></use></svg?</a>`;
+				nodes.hintInstruction.classList.add(`${CONFIG.class.hint}--show`);
 			}
 		}, CONFIG.searchTimeout);
 	};
@@ -96,7 +97,7 @@
 		nodes.resultsHeader.textContent = 'Результаты поиска';
 		nodes.hint.innerHTML = `Выставь фильтры и нажми кнопку <svg class="${CONFIG.class.hintImg}" width="14" height="14"><use xlink:href="#search"></use></svg> или Enter`;
 		nodes.hint.classList.add(`${CONFIG.class.hint}--show`);
-		nodes.sectionHints.innerHTML = '';
+		if (nodes.hintInstruction) nodes.hintInstruction.classList.remove(`${CONFIG.class.hint}--show`);
 		if (pageName === 'printers') {
 			nodes.searchValueInput.value = '';
 		}

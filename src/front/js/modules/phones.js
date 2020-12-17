@@ -30,6 +30,11 @@
 		nodes.searchValueInput.addEventListener('input', () => {
 			if (!nodes.searchValueInput.value) {
 				render.removeResults(pageName);
+				nodes.exportBtn.href = '/phones/excel';
+				nodes.exportBtn.title = 'Экспорт в Excel: весь справочник';
+			} else {
+				nodes.exportBtn.href = `/phones/excel?q=${nodes.searchValueInput.value}`;
+				nodes.exportBtn.title = 'Экспорт в Excel: только результаты запроса';
 			}
 		});
 		nodes.searchValueInput.focus();

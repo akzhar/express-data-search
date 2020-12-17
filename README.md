@@ -29,7 +29,6 @@
 - создать конфигурационный файл `./src/back/.env.json`:
 ```
 {
-    "HOST_NAME": "localhost",
     "PORT": 3000,
     "PASSWORD_MAX_AGE": 42,
     "LDAP_URL":"ldap://domain.com",

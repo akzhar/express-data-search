@@ -1,9 +1,12 @@
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 const express = require('express');
 const server = express();
 server.set('views', '../views');
 server.set('view engine', 'pug');
+const xl = require('excel4node');
+
 const ActiveDirectory = require('activedirectory');
 
 const validator = require('./utils/validator.js');
@@ -15,7 +18,7 @@ const adConfig = require('./utils/ad-config.js');
 const log = require('./utils/log.js');
 const ip = require('./utils/ip.js');
 
-const {HOST_NAME: hostName, PORT: port} = JSON.parse(fs.readFileSync('../.env.json', 'utf8'));
+const {PORT: port} = JSON.parse(fs.readFileSync('../.env.json', 'utf8'));
 const FRONT_FILES_PATH = '../../front';
 const LDAP_FILTER = {
 	users: '(|(objectClass=user)(objectClass=person))',
@@ -54,9 +57,9 @@ function serverRun() {
 			} else {
 				if (users.length === 1) {
 					const user = users[0];
-					res.render('page-user', { user, rusonly, hostName, utilsFunc: { validator, uacDecoder, managerParser, converter, cnParser } });
+					res.render('page-user', { user, rusonly, utilsFunc: { validator, uacDecoder, managerParser, converter, cnParser } });
 				} else {
-					res.render('page-users', { users, rusonly, hostName, title: `Список аккаунтов по запросу '${query}'` });
+					res.render('page-users', { users, rusonly, title: `Список аккаунтов по запросу '${query}'` });
 				}
 			}
 			log(`AD users query: ${query}`);
@@ -72,7 +75,7 @@ function serverRun() {
 			} else if (!user) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				res.render('page-user', { user, rusonly, hostName, utilsFunc: { validator, uacDecoder, managerParser, converter, cnParser } });
+				res.render('page-user', { user, rusonly, utilsFunc: { validator, uacDecoder, managerParser, converter, cnParser } });
 			}
 			log(`AD user query: ${query}`);
 		});
@@ -85,7 +88,7 @@ function serverRun() {
 			if (error) {
 				res.render('page-error', { error });
 			} else {
-				res.render('page-groups', { query, rusonly, groups, hostName });
+				res.render('page-groups', { query, rusonly, groups });
 			}
 		});
 		log(`AD groups query: ${query}`);
@@ -100,24 +103,10 @@ function serverRun() {
 			} else if (!users) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				res.render('page-users', { users, rusonly, hostName, title: `Состав группы ${query} (в т.ч. из вложенных групп)` });
+				res.render('page-users', { users, rusonly, title: `Состав группы ${query} (в т.ч. из вложенных групп)` });
 			}
 			log(`AD group query: ${query}`);
 		});
-	});
-	server.get('/qr-contact', (req, res) => {
-		const {query, rusonly} = req.query;
-		const scope = (rusonly) ? 'rus' : 'group';
-		const ad = getADinstance(scope);
-		// const filter = defineLdapFilter(mode, query);
-		ad.findUser(query, (error, user) => {
-			if (error) {
-				res.render('page-error', { error });
-			} else {
-				res.render('page-qr', { user, hostName, utilsFunc: { cnParser } });
-			}            
-		});
-		log(`QR contact query: ${query}`);
 	});
 	server.get('/computers', (req, res) => {
 		const {query, mode, rusonly} = req.query;
@@ -130,7 +119,7 @@ function serverRun() {
 			} else if (!results) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				res.render('page-computers', { computers: results.other, hostName, utilsFunc: { converter } });
+				res.render('page-computers', { computers: results.other, utilsFunc: { converter } });
 			}
 		});
 		log(`Computers query: ${query}`);
@@ -153,6 +142,56 @@ function serverRun() {
 			}
 		});
 		log(`1C users query: ${query}`);
+	});
+	// по следующему запросу сервер отдает телефонный справочник в excel формате
+	// http://ru-kom1-w171:3000/phones/excel
+	server.get('/phones/excel', (req, res) => {
+		const {q} = req.query;
+		const request = http.get(`http://ru-kom1-w171:3004/phones${q ? `?q=${q}` : ''}`);
+		let jsonStr = '';
+		request.once('response', (response) => {
+			if (response.statusCode === 200) {
+				response.on('data', (chunk) => { jsonStr += chunk; });
+				response.on('end', () => {
+					const contacts = JSON.parse(jsonStr);
+					const wb = new xl.Workbook();
+					const ws = wb.addWorksheet(`phones-${q ? q : 'all'}`);
+					const headerStyle = wb.createStyle({
+						font: {
+							bold: true,
+							color: '#ffffff',
+							size: 14,
+						},
+						fill: {
+							type: 'pattern',
+							patternType: 'solid',
+							bgColor: '#257CC1',
+							fgColor: '#257CC1'
+						},
+					});
+					
+					let col = 1;
+					let row = 2;
+					for (let contact of contacts) {
+						for (let key in contact) {
+							if (row === 2) ws.cell(1, col).string(key).style(headerStyle);
+							ws.cell(row, col).string(contact[key]);
+							col++;
+						}
+						row++;
+						col = 1;
+					}
+					wb.write(`phones-${q ? q : 'all'}.xlsx`, res);
+				});
+			} else {
+				log(`Caught exception\nExcel export query status code: ${response.statusCode}\nExcel export query status msg: ${response.statusMessage}`, true, true);
+			}
+		});
+		request.on('error', (error) => {
+			log(`Caught exception\nExcel export query error: ${error}`, true, true);
+		});
+		request.end();
+		log('Phones export to excel query');
 	});
 	server.listen(port);
 	log(`Server running at http://${ip}:${port}`);

@@ -1,9 +1,8 @@
-mixin link-img(hostName)
-	a(class='link link--img' href=`http://${hostName}:3000/accounts.html` title='Назад к поиску аккаунтов')
-		| ← 
-		svg(width='14' height='14')
-			use(xlink:href='#user')
-	a(class='link link--img' href=`http://${hostName}:3000/computers.html` title='Назад к поиску компьютеров')
-		| ← 
-		svg(width='14' height='14')
-			use(xlink:href='#laptop')
+a(class='link link--img' href='accounts.html' title='Назад к поиску аккаунтов')
+	| ← 
+	svg(width='14' height='14')
+		use(xlink:href='#user')
+a(class='link link--img' href='computers.html' title='Назад к поиску компьютеров')
+	| ← 
+	svg(width='14' height='14')
+		use(xlink:href='#laptop')

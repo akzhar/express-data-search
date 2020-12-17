@@ -5,28 +5,39 @@
 	font-size 0.8rem
 	line-height 0.8rem
 
-	&--img
-		display flex
-		align-items center
-		margin 0 0 12px 10px
-		color color__brand
-		font-size 0.6rem
-		line-height 0.6rem
-
-		&:first-child
-			margin-left 0
-
-		& svg
-			fill color__brand
-			margin 0 0 0 6px
-		
 	&:hover
 		text-decoration underline
 		opacity 0.8
 
 	&:active
 		text-decoration none
-		opacity 0.3
+		opacity 0.6
+
+	&--img
+		position relative
+		margin 0 0 0 20px
+		color color__brand
+		font-size 0.6rem
+		line-height 0.6rem
+
+		& svg
+			position absolute
+			top 50%
+			left 50%
+			transform translate(-50%, -50%)
+			fill color__grey
+		
+		&:hover 
+			text-decoration none
+			
+			& svg 
+				fill color__brand
+				transition 0.8s			
+
+	&--excel
+
+		&:hover svg 
+			fill color__green
 
 .item .link
 	color color__brand

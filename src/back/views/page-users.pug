@@ -1,6 +1,5 @@
 include ../blocks/header/header.pug
 include ../blocks/head/head.pug
-include ../blocks/link/link-img.pug
 
 doctype html
 html(lang='ru')
@@ -14,7 +13,7 @@ html(lang='ru')
 				div
 					h2(class='section__head')=`Результаты поиска - [${users.length}]`
 					div(class='section__hints')
-						+link-img(hostName)
+						include ../blocks/hint/hint-back-btns.pug
 					ul(class='section__content results results--show')
 						each user, index in users
 							li(class='results__item item')

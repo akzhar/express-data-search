@@ -14,9 +14,12 @@
 		searchBtn: document.querySelector(`#${CONFIG.id.searchBtn}`),
 		resultsHeader: document.querySelector(`#${CONFIG.id.resultsHeader}`),
 		hint: document.querySelector(`#${CONFIG.id.hint}`),
+		hintInstruction: document.querySelector(`#${CONFIG.id.hintInstruction}`),
 		loader: document.querySelector(`#${CONFIG.id.loader}`),
 		sectionHints: document.querySelector(`#${CONFIG.id.sectionHints}`),
-		resultsContainer: document.querySelector(`#${CONFIG.id.resultsContainer}`)
+		resultsContainer: document.querySelector(`#${CONFIG.id.resultsContainer}`),
+		exportBtn: document.querySelector(`#${CONFIG.id.exportBtn}`)
+
 	};
 
 	window.exports.nodes = nodes;
