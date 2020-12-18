@@ -18,6 +18,10 @@
 	const onSearchBtnClick = () => {
 		render.showLoadingMsg();
 		utils.debounce(retrieveResults)();
+		if (nodes.searchValueInput.value) {
+			nodes.exportBtn.href = `/phones/excel?q=${nodes.searchValueInput.value}`;
+			nodes.exportBtn.title = 'Экспорт в Excel: только результаты запроса';
+		}
 	};
 
 	const init = () => {
@@ -32,9 +36,6 @@
 				render.removeResults(pageName);
 				nodes.exportBtn.href = '/phones/excel';
 				nodes.exportBtn.title = 'Экспорт в Excel: весь справочник';
-			} else {
-				nodes.exportBtn.href = `/phones/excel?q=${nodes.searchValueInput.value}`;
-				nodes.exportBtn.title = 'Экспорт в Excel: только результаты запроса';
 			}
 		});
 		nodes.searchValueInput.focus();

@@ -17,7 +17,7 @@
 		ipLink.textContent = printer[name];
 		ipLink.href = `http://${printer[ip]}`;
 		ipLink.title = 'Статус, тонер и т.д. Откроется, если у принтера имеется web консоль';
-		ipLink.target = 'blank';
+		ipLink.target = '_blank';
 
 		const head = document.createElement('h3');
 		head.classList.add(CONFIG.class.itemHead);
@@ -25,7 +25,7 @@
 		head.appendChild(ipLink);
 		item.appendChild(head);
 
-		const photoUrl = `<a href="https://www.google.com/search?q=${printer[model]}&tbm=isch" class="link" target="blank" title='Фото данной модели'>${printer[model]}</a>`;
+		const photoUrl = `<a href="https://www.google.com/search?q=${printer[model]}&tbm=isch" class="link" target="_blank" title='Фото данной модели'>${printer[model]}</a>`;
 		addProperty('Расположение', printer[area], item);
 		addProperty('Модель', photoUrl, item);
 		addProperty('Цветной', printer[isColor], item);
@@ -58,8 +58,8 @@
 			qrLink.href = qr.getQRurl(contact);
 			qrLink.classList.add(CONFIG.class.link);
 			qrLink.classList.add(CONFIG.class.qrLink);
-			qrLink.target = 'blank';
-			qrLink.title = 'Сохрани контакт в телефон';
+			qrLink.target = '_blank';
+			qrLink.title = 'Сохранить контакт в телефон';
 			qrLink.innerHTML = '<svg width="50" height="50"><use xlink:href="#qrcode"></use></svg>';
 			item.appendChild(qrLink);
 		}
