@@ -95,7 +95,7 @@
 	const removeResults = (pageName) => { // ф-ция очищает результаты предыдущего поиска
 		nodes.resultsContainer.classList.remove(`${CONFIG.class.results}--show`);
 		nodes.resultsHeader.textContent = 'Результаты поиска';
-		nodes.hint.innerHTML = `Выставь фильтры и нажми кнопку <svg class="${CONFIG.class.hintImg}" width="14" height="14"><use xlink:href="#search"></use></svg> или Enter`;
+		nodes.hint.innerHTML = `Выставь фильтры и нажми кнопку <svg class="${CONFIG.class.hintImg}" width="14" height="14" fill="green"><use xlink:href="#search"></use></svg> или Enter`;
 		nodes.hint.classList.add(`${CONFIG.class.hint}--show`);
 		if (nodes.hintInstruction) nodes.hintInstruction.classList.remove(`${CONFIG.class.hint}--show`);
 		if (pageName === 'printers') {

@@ -175,7 +175,7 @@ function serverRun() {
 					for (let contact of contacts) {
 						for (let key in contact) {
 							if (row === 2) ws.cell(1, col).string(key).style(headerStyle);
-							ws.cell(row, col).string(contact[key]);
+							ws.cell(row, col).string(contact[key].toString());
 							col++;
 						}
 						row++;

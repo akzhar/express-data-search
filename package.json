@@ -8,7 +8,7 @@
     "json-server": "json-server --watch \\\\ru-kom1-d000\\Public\\Node.js\\data\\data.json --port 3004 --host ru-kom1-w171",
     "build": "gulp build",
     "watch": "gulp watch",
-    "serve": "cd build\\back\\js && node server.js",
+    "serve": "cd buildjson\\back\\js && node server.js",
     "dev": "npm run build && start npm run json-server && start npm run watch && npm run serve"
   },
   "dependencies": {
