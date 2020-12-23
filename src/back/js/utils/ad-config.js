@@ -16,7 +16,8 @@ const userAttr =
 	'lockoutTime',
 	'whenChanged',
 	'extensionAttribute15', // site code
-	'telephoneNumber'
+	'telephoneNumber',
+	'accountExpires'
 ];
 const userAttrLimited = ['sAMAccountName', 'mail'];
 const groupAttr = ['cn', 'description'];

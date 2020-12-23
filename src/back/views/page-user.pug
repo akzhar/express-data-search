@@ -20,7 +20,7 @@ html(lang='ru')
 					ul(class='section__content results results--show')
 						li(class='results__item item')
 							h3(class='item__head')=`group\\${user.sAMAccountName}`
-							p(class='item__property')!=`<b>Тип аккаунта:</b> ${user.extensionAttribute1}`
+							p(class='item__property')!=`<b>Тип аккаунта:</b> ${user.extensionAttribute1} ${utilsFunc.validator.isExpired(user)}`
 							p(class='item__property')!=`<b>Описание аккаунта:</b> ${(user.description) ? user.description : ''}`
 							p(class='item__property')!=`<b>Пароль просрочен:</b> ${password.isExpired}`
 							p(class='item__property')!=`<b>Пароль изменен:</b> ${password.whenChanged}`
