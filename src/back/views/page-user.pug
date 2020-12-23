@@ -35,4 +35,4 @@ html(lang='ru')
 							p(class='item__property')!=`<b>Руководитель:</b> ${(user.manager) ? utilsFunc.managerParser(user.manager) : ''}`
 							div(class='item__btns-wrapper')
 								a(class='item__search-btn btn' href=`/ad-groups?query=${user.sAMAccountName}`) Список AD групп
-								a(class='item__search-btn btn' href=`/computers?${rusonly ? 'rusonly=on&' : ''}mode=computer-by-owner&query=${initials.name.slice(0, 1)}${initials.surname}`) Компьютер пользователя
+								a(class='item__search-btn btn' href=`/computers?${rusonly ? 'rusonly=on&' : ''}mode=computers-by-owner&query=${initials.name.slice(0, 1)}${initials.surname}`) Компьютер пользователя
