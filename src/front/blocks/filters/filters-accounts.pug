@@ -4,11 +4,12 @@ include ../checkbox/checkbox.pug
 form(class='filters' action='ad-users' method='get')
 	div(class='filters__wrapper' id='mode-selector')
 		h3(class='filters__label') Режим поиска
-		+radio([{id: 'mode-name', name: 'mode', value: 'account-by-name', label: 'Поиск по имени (cn)', checked: true},
-				{id: 'mode-mail', name: 'mode', value: 'account-by-mail', label: 'Поиск по почте (mail)', checked: false},
-				{id: 'mode-ldap', name: 'mode', value: 'account-by-ldap', label: 'Расширенный поиск (LDAP фильтр)', checked: false}])
+		+radio([{id: 'accounts-mode-name', name: 'mode', value: 'accounts-by-name', label: 'Поиск по имени (cn)', checked: true},
+				{id: 'accounts-mode-mail', name: 'mode', value: 'accounts-by-mail', label: 'Поиск по почте (mail)', checked: false},
+				{id: 'accounts-mode-ldap', name: 'mode', value: 'accounts-by-ldap', label: 'Расширенный поиск (LDAP фильтр)', checked: false}])
 	div(class='filters__wrapper')
-		label(class='filters__label' for='search-value' id='search-value-header')
-		input(type='text' name='query' placeholder='' id='search-value')
+		label(class='filters__label' for='search-value-input' id='search-value-header')
+		input(type='text' name='query' placeholder='' id='search-value-input')
 		+checkbox({title: 'искать только по OU России', name: "rusonly", checked: true}) 
+	div(class='filters__wrapper')
 		input(class='btn btn--search' type='submit' title='Искать' value='' disabled=true)

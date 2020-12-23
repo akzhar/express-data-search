@@ -4,7 +4,7 @@
 
 	const nodes = {
 		modeSelector: document.querySelector(`#${CONFIG.id.modeSelector}`),
-		modeRadioBtns: document.getElementsByTagName('input'),
+		modeRadioBtns: document.querySelectorAll('input[type="radio"]'),
 		searchValueHeader: document.querySelector(`#${CONFIG.id.searchValueHeader}`),
 		submitBtn: document.querySelector('input[type="submit"]'),
 		plantSelect: document.querySelector(`#${CONFIG.id.plantSelect}`),

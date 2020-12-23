@@ -1,0 +1,15 @@
+include ../radio/radio.pug
+include ../checkbox/checkbox.pug
+
+form(class='filters' action='ad-users-expired' method='get')
+	div(class='filters__wrapper' id='mode-selector')
+		h3(class='filters__label') Площадка
+		+radio([{id: 'accounts-mode-expired-vse', name: 'site', value: 'RU001', label: 'Всеволожск', checked: true},
+				{id: 'accounts-mode-expired-kom', name: 'site', value: 'RU003', label: 'Коммунар', checked: false},
+				{id: 'accounts-mode-expired-mos', name: 'site', value: 'RU005', label: 'Москва', checked: false}])
+	div(class='filters__wrapper')
+		label(class='filters__label' for='search-value-input' id='search-value-header')
+		p Пароль просрочен или будет просрочен через ... дн.
+		input(type='text' name='query' placeholder='' id='search-value-input')
+	div(class='filters__wrapper')
+		input(class='btn btn--search' type='submit' title='Искать' value='' disabled=true)

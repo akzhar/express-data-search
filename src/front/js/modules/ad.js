@@ -5,15 +5,18 @@
 	let searchValueInput = undefined;
 
 	const setMode = (options) => {
-		const mode = Array.prototype.filter.call(nodes.modeRadioBtns, (radio) => radio.checked)[0].value;
-		nodes.searchValueHeader.textContent = CONFIG.modeToText[mode].header;
-		searchValueInput.placeholder = CONFIG.modeToText[mode].placeholder;
-		if (mode === options.hintMode) {
-			nodes.hint.classList.add(`${CONFIG.class.hint}--show`);
-		} else {
-			nodes.hint.classList.remove(`${CONFIG.class.hint}--show`);
+		const modeId = Array.prototype.filter.call(nodes.modeRadioBtns, (radio) => radio.checked)[0].id;
+		nodes.searchValueHeader.textContent = CONFIG.modeIdToText[modeId].header;
+		searchValueInput.placeholder = CONFIG.modeIdToText[modeId].placeholder;
+		if (options) {
+			if (modeId === options.idModeToShowHint) {
+				nodes.hint.classList.add(`${CONFIG.class.hint}--show`);
+			} else {
+				nodes.hint.classList.remove(`${CONFIG.class.hint}--show`);
+			}
 		}
 		searchValueInput.value = '';
+		nodes.submitBtn.disabled = true;
 		searchValueInput.focus();
 	};
 

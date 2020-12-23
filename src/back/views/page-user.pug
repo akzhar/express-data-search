@@ -20,11 +20,11 @@ html(lang='ru')
 					ul(class='section__content results results--show')
 						li(class='results__item item')
 							h3(class='item__head')=`group\\${user.sAMAccountName}`
-							p(class='item__property')!=`<b>Тип аккаунта:</b> ${user.extensionAttribute1} ${utilsFunc.validator.isExpired(user)}`
+							p(class='item__property')!=`<b>Тип аккаунта:</b> ${user.extensionAttribute1} ${utilsFunc.validator.isUserExpired(user)}`
 							p(class='item__property')!=`<b>Описание аккаунта:</b> ${(user.description) ? user.description : ''}`
-							p(class='item__property')!=`<b>Пароль просрочен:</b> ${password.isExpired}`
-							p(class='item__property')!=`<b>Пароль изменен:</b> ${password.whenChanged}`
-							p(class='item__property')!=`<b>Аккаунт залочен:</b> ${utilsFunc.validator.isUserLocked(user)}`
+							p(class='item__property')!=`<b>Пароль просрочен:</b> ${password.expiredMsg}`
+							p(class='item__property')!=`<b>Пароль изменен:</b> ${password.lastSet}`
+							p(class='item__property')!=`<b>Аккаунт залочен:</b> ${utilsFunc.validator.account(user).lockedMsg}`
 							p(class='item__property')!=`<b>Статус (UAC):</b> ${utilsFunc.uacDecoder(user.userAccountControl)}`
 							p(class='item__property')!=`<b>Аккаунт создан:</b> ${utilsFunc.converter.dateToString(utilsFunc.converter.timeStampToDate(user.whenCreated))}`
 							p(class='item__property')!=`<b>Аккаунт изменен:</b> ${utilsFunc.converter.dateToString(utilsFunc.converter.timeStampToDate(user.whenChanged))}`

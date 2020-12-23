@@ -1,0 +1,11 @@
+include ../radio/radio.pug
+include ../checkbox/checkbox.pug
+
+form(class='filters' action='ad-users-locked' method='get')
+	div(class='filters__wrapper' id='mode-selector')
+		h3(class='filters__label') Площадка
+		+radio([{id: 'accounts-mode-locked-vse', name: 'site', value: 'RU001', label: 'Всеволожск', checked: true},
+				{id: 'accounts-mode-locked-kom', name: 'site', value: 'RU003', label: 'Коммунар', checked: false},
+				{id: 'accounts-mode-locked-mos', name: 'site', value: 'RU005', label: 'Москва', checked: false}])
+	div(class='filters__wrapper')
+		input(class='btn btn--search' type='submit' title='Искать' value='')

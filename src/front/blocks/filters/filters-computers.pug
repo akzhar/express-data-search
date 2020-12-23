@@ -4,10 +4,11 @@ include ../checkbox/checkbox.pug
 form(class='filters' action='computers' method='get')
 	div(class='filters__wrapper' id='mode-selector')
 		h3(class='filters__label') Режим поиска
-		+radio([{id: 'mode-name', name: 'mode', value: 'computer-by-name', label: 'Поиск по имени (cn)', checked: false},
-				{id: 'mode-owner', name: 'mode', value: 'computer-by-owner', label: 'Поиск по владельцу (description)', checked: true}])
+		+radio([{id: 'computers-mode-name', name: 'mode', value: 'computers-by-name', label: 'Поиск по имени (cn)', checked: false},
+				{id: 'computers-mode-owner', name: 'mode', value: 'computers-by-owner', label: 'Поиск по владельцу (description)', checked: true}])
 	div(class='filters__wrapper')
-		label(class='filters__label' for='search-value' id='search-value-header')
-		input(type='text' name='query' placeholder='' id='search-value')
+		label(class='filters__label' for='search-value-input' id='search-value-header')
+		input(type='text' name='query' placeholder='' id='search-value-input')
 		+checkbox({title: 'искать только по OU России', name: "rusonly", checked: true}) 
+	div(class='filters__wrapper')
 		input(class='btn btn--search' type='submit' title='Искать' value='' disabled=true)

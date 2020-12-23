@@ -11,7 +11,9 @@ const pages = {
 	accounts: { href: 'accounts.html', description: 'Поиск аккаунтов в AD' },
 	computers: { href: 'computers.html', description: 'Поиск компьютеров в AD' },
 	printers: { href: 'printers.html', description: 'Поиск принтеров' },
-	phones: { href: 'phones.html', description: 'Поиск телефонов' }
+	phones: { href: 'phones.html', description: 'Поиск телефонов' },
+	expired: { href: 'expired.html', description: 'Список AD аккаунтов с просроченным паролем' },
+	locked: { href: 'locked.html', description: 'Список залоченных AD аккаунтов' }
 };
 // const fs = require('fs');
 // const data = JSON.parse( fs.readFileSync('./filename.json', { encoding: 'utf8' }) );

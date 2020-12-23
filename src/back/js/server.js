@@ -35,11 +35,11 @@ function getADinstance(scope) {
 
 // ф-ция определяет ldap фильтр для поиска в зависимости от режима (mode)
 function defineLdapFilter(mode, query) { 
-	if (mode === 'account-by-ldap') return {filter: `(&${LDAP_FILTER.users}${query})`};
-	if (mode === 'account-by-name') return {filter: `(&${LDAP_FILTER.users}(cn=*${query}*))`};
-	if (mode === 'account-by-mail') return {filter: `(&${LDAP_FILTER.users}(mail=${query}))`};
-	if (mode === 'computer-by-name') return {filter: `(&${LDAP_FILTER.computers}(cn=*${query}*))`};
-	if (mode === 'computer-by-owner') return {filter: `(&${LDAP_FILTER.computers}(description=*${query}*))`};
+	if (mode === 'accounts-by-ldap') return {filter: `(&${LDAP_FILTER.users}${query})`};
+	if (mode === 'accounts-by-name') return {filter: `(&${LDAP_FILTER.users}(cn=*${query}*))`};
+	if (mode === 'accounts-by-mail') return {filter: `(&${LDAP_FILTER.users}(mail=${query}))`};
+	if (mode === 'computers-by-name') return {filter: `(&${LDAP_FILTER.computers}(cn=*${query}*))`};
+	if (mode === 'computers-by-owner') return {filter: `(&${LDAP_FILTER.computers}(description=*${query}*))`};
 }
 
 function serverRun() {
@@ -63,6 +63,51 @@ function serverRun() {
 				}
 			}
 			log(`AD users query: ${query}`);
+		});
+	});
+	server.get('/ad-users-expired', (req, res) => {
+		const {query, site} = req.query;
+		const after = query;
+		if (!/^\d+$/.test(after)) res.render('page-error', { error: 'Input should be an integer number!' });
+		const rusonly = 'on';
+		const scope = (rusonly) ? 'rus' : 'group';
+		const ad = getADinstance(scope);
+		const filter = defineLdapFilter('accounts-by-ldap', `(extensionAttribute15=${site})`);
+		ad.findUsers(filter, (error, users) => {
+			if (error) {
+				res.render('page-error', { error });
+			} else if (!users) {
+				res.render('page-error', { error: 'Nothing was found' });
+			} else {
+				const expiredUsers = users.filter(user => {
+					const password = validator.password(user);
+					if (password.isExpired) return true;
+					if (password.daysToExpire <= after) return true;
+					return false;
+				});
+				res.render('page-users', { users: expiredUsers, rusonly, title: `${site}: пароль просрочен или будет просрочен через ${after} дн.` });
+
+			}
+			log(`Expired AD users query: ${site}`);
+		});
+	});
+	server.get('/ad-users-locked', (req, res) => {
+		const {site} = req.query;
+		const rusonly = 'on';
+		const scope = (rusonly) ? 'rus' : 'group';
+		const ad = getADinstance(scope);
+		const filter = defineLdapFilter('accounts-by-ldap', `(extensionAttribute15=${site})`);
+		ad.findUsers(filter, (error, users) => {
+			if (error) {
+				res.render('page-error', { error });
+			} else if (!users) {
+				res.render('page-error', { error: 'Nothing was found' });
+			} else {
+				const lockedUsers = users.filter(user => validator.account(user).isLocked);
+				res.render('page-users', { users: lockedUsers, rusonly, title: `Залоченные аккаунты ${site}` });
+
+			}
+			log(`Locked AD users query: ${site}`);
 		});
 	});
 	server.get('/ad-user', (req, res) => {

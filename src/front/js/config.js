@@ -30,13 +30,15 @@
 			property: 'item__property',
 			qrLink: 'item__qrlink'
 		},
-		modeToText: {
-			'account-by-name':  {header: 'Поиск по имени (cn)', placeholder: 'cn (можно только часть)'},
-			'account-by-mail': {header: 'Поиск по почте (mail)', placeholder: 'mail (полностью)'},
-			'account-by-ldap': {header: 'Расширенный поиск (LDAP фильтр)', placeholder: '(givenName=*)(sn=*)'},
-			'computer-by-name':  {header: 'Поиск по имени (cn)', placeholder: 'cn (можно только часть)'},
-			'computer-by-owner': {header: 'Поиск по владельцу (description)', placeholder: 'sAMAccountName (можно только часть)'}
-
+		modeIdToText: {
+			'accounts-mode-name':  {header: 'Поиск по имени (cn)', placeholder: 'cn (можно только часть)'},
+			'accounts-mode-mail': {header: 'Поиск по почте (mail)', placeholder: 'mail (полностью)'},
+			'accounts-mode-ldap': {header: 'Расширенный поиск (LDAP фильтр)', placeholder: '(givenName=*)(sn=*)'},
+			'accounts-mode-expired-vse': {header: 'Поиск среди аккаунтов RU001', placeholder: 'кол-во дней (число)'},
+			'accounts-mode-expired-kom': {header: 'Поиск среди аккаунтов RU003', placeholder: 'кол-во дней (число)'},
+			'accounts-mode-expired-mos': {header: 'Поиск среди аккаунтов RU005', placeholder: 'кол-во дней (число)'},
+			'computers-mode-name':  {header: 'Поиск по имени (cn)', placeholder: 'cn (можно только часть)'},
+			'computers-mode-owner': {header: 'Поиск по владельцу (description)', placeholder: 'sAMAccountName (можно только часть)'}
 		},
 		dataFieldNames: {
 			phones: {

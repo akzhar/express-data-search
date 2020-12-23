@@ -17,6 +17,8 @@ if(pageName === 'printers') { // данные грузятся 1 раз - дал
 
 if(pageName === 'phones') phones.init(); // данные запрашиваются каждый раз у json-server
 
-if(pageName === 'accounts') ad.init({ hintMode: 'account-by-ldap'});
+if(pageName === 'accounts') ad.init({ idModeToShowHint: 'accounts-mode-ldap'});
 
-if(pageName === 'computers') ad.init({ hintMode: 'computer-by-owner'});
+if(pageName === 'expired') ad.init();
+
+if(pageName === 'computers') ad.init({ idModeToShowHint: 'computers-mode-owner'});
