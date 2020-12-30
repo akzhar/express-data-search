@@ -89,7 +89,7 @@
 			if (pageName === 'printers') {
 				nodes.hintInstruction.classList.add(`${CONFIG.class.hint}--show`);
 			}
-		}, CONFIG.searchTimeout);
+		}, CONFIG.loaderTimeout);
 	};
 
 	const removeResults = (pageName) => { // ф-ция очищает результаты предыдущего поиска

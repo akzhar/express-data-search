@@ -105,7 +105,6 @@ function serverRun() {
 			} else {
 				const lockedUsers = users.filter(user => validator.account(user).isLocked);
 				res.render('page-users', { users: lockedUsers, rusonly, title: `Залоченные аккаунты ${site}` });
-
 			}
 			log(`Locked AD users query: ${site}`);
 		});

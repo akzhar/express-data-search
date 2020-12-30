@@ -65,7 +65,7 @@
 		qrSize: 500,
 		faceSad: '&#128557',
 		debounceInterval: 500,
-		searchTimeout: 250,
+		loaderTimeout: 250,
 		xhrTimeout: 5000,
 		xhrStatus: { ok: 200 },
 		xhrMsg: {

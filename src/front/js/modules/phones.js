@@ -12,10 +12,12 @@
 		xhr.getRequest(`http://${CONFIG.hostName}:3004/${pageName}${dataToSearch ? `?q=${encodeURIComponent(dataToSearch)}` : ''}`, 'application/json', (data) => {
 			const results = JSON.parse(data);
 			results.length ? render.printResults(results, pageName) : render.showEmptyMsg();
+			nodes.searchBtn.disabled = false;
 		}).send();
 	};
 
 	const onSearchBtnClick = () => {
+		nodes.searchBtn.disabled = true;
 		render.showLoadingMsg();
 		utils.debounce(retrieveResults)();
 		if (nodes.searchValueInput.value) {

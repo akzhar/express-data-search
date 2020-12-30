@@ -12,6 +12,7 @@
 		const dataToSearch = nodes.searchValueInput.value.toLowerCase();
 		const results = utils.getFilteredData(dataByPlant, fieldName, dataToSearch);
 		results.length ? render.printResults(results, pageName) : render.showEmptyMsg();
+		nodes.searchBtn.disabled = false;
 	};
 
 	const addOption = (select, value) => { // ф-ция добавляет option в select
@@ -68,6 +69,7 @@
 	};
 
 	const onSearchBtnClick = () => {
+		nodes.searchBtn.disabled = true;
 		render.showLoadingMsg();
 		utils.debounce(retrieveResults)();
 	};
