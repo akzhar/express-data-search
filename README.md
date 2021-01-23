@@ -1,6 +1,15 @@
 # express-data-search
 Веб приложение для поиска информации в Active Directory (аккаунты, группы, компьютеры).
+
+<img src="https://raw.githubusercontent.com/akzhar/express-data-search/main/demo/1.jpg" alt="AD accounts search" title="AD accounts search" width="35%"/>
+<img src="https://raw.githubusercontent.com/akzhar/express-data-search/main/demo/2.jpg" alt="'taov' query result" title="'taov' query result" width="35%"/>
+<img src="https://raw.githubusercontent.com/akzhar/express-data-search/main/demo/3.jpg" alt="group\ataov accout's details" title="group\ataov accout's details" width="35%"/>
+<img src="https://raw.githubusercontent.com/akzhar/express-data-search/main/demo/4.jpg" alt="AD computers search" title="AD computers search" width="35%"/>
+
 Помимо AD, приложение выполняет поиск по данным в формате JSON (принтеры, телефоны).
+
+<img src="https://raw.githubusercontent.com/akzhar/express-data-search/main/demo/5.jpg" alt="Printers search" title="Printers search" width="35%"/>
+<img src="https://raw.githubusercontent.com/akzhar/express-data-search/main/demo/6.jpg" alt="Phones search" title="Phones search" width="35%"/>
 
 ### Поиск в AD позволяет проверить: 
 - залочен ли аккаунт
