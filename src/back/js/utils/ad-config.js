@@ -21,17 +21,15 @@ const userAttr =
 ];
 const userAttrLimited = ['sAMAccountName', 'mail'];
 const groupAttr = ['cn', 'description'];
-const computerAttr = ['cn', 'description', 'whenCreated'];
 
-function Config(baseDN, user = userAttr, group = groupAttr, computer = computerAttr) { 
+function Config(baseDN, user = userAttr, group = groupAttr) { 
 	this.url = env.LDAP_URL;
 	this.baseDN = baseDN;
 	this.username =  env.USER_NAME;
 	this.password = env.PASSWORD;
 	this.attributes = {
 		user: user,
-		group: group,
-		computer: computer
+		group: group
 	};
 }
 

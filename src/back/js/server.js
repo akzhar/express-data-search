@@ -42,6 +42,61 @@ function defineLdapFilter(mode, query) {
 	if (mode === 'computers-by-owner') return {filter: `(&${LDAP_FILTER.computers}(description=*${query}*))`};
 }
 
+// ф-ция создает Excel файл с данными objects (JSON) и отдает его в качестве ответа res
+function exportToExcel(objects, query, res, colsToExport = []) {
+	const wb = new xl.Workbook();
+	const wsOptions = {
+		pageSetup: {
+			orientation: 'landscape'
+		}
+	};
+	const ws = wb.addWorksheet(`${query ? query : 'all'}`, wsOptions);
+	const headerStyle = wb.createStyle({
+		font: {
+			bold: true,
+			color: '#ffffff',
+			size: 14,
+		},
+		fill: {
+			type: 'pattern',
+			patternType: 'solid',
+			bgColor: '#257CC1',
+			fgColor: '#257CC1'
+		},
+		alignment: {
+			horizontal: 'center',
+			vertical: 'center'
+		}	
+	});
+	const cellsStyle = wb.createStyle({
+		alignment: {
+			vertical: 'center',
+			wrapText: true
+		}		
+	});
+	
+	let col = 1;
+	let row = 2;
+	for (let obj of objects) {
+		col = 1;
+		for (let key in obj) {
+			if (colsToExport.length === 0 || colsToExport.indexOf(key) !== -1) {
+				if (row === 2) ws.cell(1, col).string(key).style(headerStyle);
+				let cellValue = obj[key].toString();
+				if (key === 'whenCreated') {
+					cellValue = converter.dateToString(converter.timeStampToDate(cellValue));
+				}
+				ws.cell(row, col).string(cellValue).style(cellsStyle);
+				ws.column(col).setWidth(20);
+				col++;
+			}
+		}
+		row++;
+	}
+	ws.setPrintArea(1, 1, row-1, col-1);
+	wb.write(`${query ? query : 'all'}.xlsx`, res);
+}
+
 function serverRun() {
 	server.use(express.static(path.resolve(__dirname, FRONT_FILES_PATH)));
 	server.get('/ad-users', (req, res) => {
@@ -163,10 +218,26 @@ function serverRun() {
 			} else if (!results) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				res.render('page-computers', { computers: results.other, utilsFunc: { converter } });
+				res.render('page-computers', { computers: results.other, utilsFunc: { converter }, rusonly, query });
 			}
 		});
 		log(`Computers query: ${query}`);
+	});
+	server.get('/computers/excel', (req, res) => {
+		const {query, mode, rusonly} = req.query;
+		const scope = (rusonly) ? 'rus' : 'group';
+		const ad = getADinstance(scope);
+		const filter = defineLdapFilter(mode, query);
+		ad.find(filter, (error, results) => {
+			if (error) {
+				res.render('page-error', { error });
+			} else if (!results) {
+				res.render('page-error', { error: 'Nothing was found' });
+			} else {
+				exportToExcel(results.other, query, res, ['cn', 'description', 'whenCreated']);
+			}
+		});
+		log(`Computers export to excel query: ${query}`);
 	});
 	// по следующему запросу сервер отдает список пользователей в json формате (используется в 1С)
 	// http://ru-kom1-w171:3000/ad-users/json?scope=rus-limited
@@ -197,35 +268,7 @@ function serverRun() {
 			if (response.statusCode === 200) {
 				response.on('data', (chunk) => { jsonStr += chunk; });
 				response.on('end', () => {
-					const contacts = JSON.parse(jsonStr);
-					const wb = new xl.Workbook();
-					const ws = wb.addWorksheet(`phones-${q ? q : 'all'}`);
-					const headerStyle = wb.createStyle({
-						font: {
-							bold: true,
-							color: '#ffffff',
-							size: 14,
-						},
-						fill: {
-							type: 'pattern',
-							patternType: 'solid',
-							bgColor: '#257CC1',
-							fgColor: '#257CC1'
-						},
-					});
-					
-					let col = 1;
-					let row = 2;
-					for (let contact of contacts) {
-						for (let key in contact) {
-							if (row === 2) ws.cell(1, col).string(key).style(headerStyle);
-							ws.cell(row, col).string(contact[key].toString());
-							col++;
-						}
-						row++;
-						col = 1;
-					}
-					wb.write(`phones-${q ? q : 'all'}.xlsx`, res);
+					exportToExcel(JSON.parse(jsonStr), q, res);
 				});
 			} else {
 				log(`Caught exception\nExcel export query status code: ${response.statusCode}\nExcel export query status msg: ${response.statusMessage}`, true, true);

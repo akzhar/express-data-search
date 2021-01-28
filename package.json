@@ -8,7 +8,7 @@
     "json-server": "json-server --watch \\\\ru-kom1-d000\\Public\\Node.js\\data\\data.json --port 3004 --host ru-kom1-w171",
     "build": "gulp build",
     "watch": "gulp watch",
-    "serve": "cd build\\back\\js && node server.js",
+    "serve": "cd build\\back\\js && nodemon server.js -e js,pug",
     "dev": "npm run build && start npm run json-server && start npm run watch && npm run serve"
   },
   "dependencies": {
@@ -52,6 +52,7 @@
     "imagemin-pngquant": "^6.0.1",
     "imagemin-svgo": "^7.0.0",
     "multipipe": "^3.0.1",
+    "nodemon": "^2.0.7",
     "path": "^0.12.7"
   }
 }
