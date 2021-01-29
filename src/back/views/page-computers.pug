@@ -15,7 +15,7 @@ html(lang='ru')
 					div(class='section__hints')
 						include ../blocks/hint/hint-back-btns.pug
 						p(class='hint hint--show')
-							a(href=`/computers/excel?${rusonly ? 'rusonly=on&' : ''}mode=computers-by-name&query=${query}` class='link link--img link--excel' id='btn-export' target="_blank" title='Экспорт в Excel')
+							a(href=`/computers/excel?${rusonly ? 'rusonly=on&' : ''}mode=${mode}&query=${query}` class='link link--img link--excel' id='btn-export' target="_blank" title='Экспорт в Excel')
 								svg(width='18' height='18')
 									use(xlink:href='#excel')
 					ul(class='section__content results results--show')

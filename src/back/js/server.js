@@ -218,7 +218,7 @@ function serverRun() {
 			} else if (!results) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				res.render('page-computers', { computers: results.other, utilsFunc: { converter }, rusonly, query });
+				res.render('page-computers', { computers: results.other, utilsFunc: { converter }, rusonly, query, mode });
 			}
 		});
 		log(`Computers query: ${query}`);
