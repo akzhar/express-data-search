@@ -34,11 +34,11 @@
 ### Настройка приложения под себя:
 - скачать репозиторий
 - установить зависимости: `npm i`
-- изменить абсолютный путь к файлу `server.js` в файлах `runServer.cmd`и `stopServer.cmd`
+- изменить абсолютный путь к файлу `server.js` в файле `runServer.cmd`
 - создать конфигурационный файл `./src/back/.env.json`:
 ```
 {
-    "PORT": 3000,
+    "PORT": 80,
     "PASSWORD_MAX_AGE": 42,
     "LDAP_URL":"ldap://domain.com",
     "BASE_DN_GROUP": "ou=unit, dc=domain, dc=com",
@@ -47,9 +47,11 @@
     "PASSWORD": "yourpassword"
 }
 ```
-- в конфигурационном файле `./src/front/js/config.js` изменить значения переменных `hostName` (имя вашего локального хоста) и `url.instruction` (ссылка на инструкцию по подключению принтера)
 - в скрипте `json-server` в файле `package.json` изменить путь к файлу data.json (файл с данными принтеров и телефонов формируется файлом `EXCEL to JSON.xlsm`) и значение у флага `--host`
 - командой `npm run build` собрать проект (папка `build`)
 
 ### Запуск сервера:
 - `runServer.cmd` (можно через планировщик заданий)
+
+### Сстановка сервера:
+- `stopServer.cmd` (можно через планировщик заданий)

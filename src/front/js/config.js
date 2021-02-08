@@ -50,7 +50,6 @@
 				external: 'Городской',
 				mobFull: 'Полный мобильный',
 				mobShort: 'Короткий мобильный',
-				dect: 'DECT/CISCO',
 				fax: 'Факс'
 			},
 			printers: {

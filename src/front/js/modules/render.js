@@ -1,7 +1,7 @@
 
 (function(){
 	const CONFIG = window.exports.CONFIG;
-	const { plant, fio, description, dept, mobFull, mobShort, internal, external, dect, fax } = CONFIG.dataFieldNames.phones;
+	const { plant, fio, description, dept, mobFull, mobShort, internal, external, fax } = CONFIG.dataFieldNames.phones;
 	const { ip, name, model, area, isColor } = CONFIG.dataFieldNames.printers;
 	const nodes = window.exports.nodes;
 	const utils = window.exports.utils;
