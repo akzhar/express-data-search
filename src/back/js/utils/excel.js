@@ -9,7 +9,8 @@ function exportToExcel(objects, query, res, colsToExport = []) {
 			orientation: 'landscape'
 		}
 	};
-	const ws = wb.addWorksheet(`${query ? query : 'all'}`, wsOptions);
+	const name = `phones ${query ? query : 'all'}`;
+	const ws = wb.addWorksheet(name, wsOptions);
 	const headerStyle = wb.createStyle({
 		font: {
 			bold: true,
@@ -52,8 +53,12 @@ function exportToExcel(objects, query, res, colsToExport = []) {
 		}
 		row++;
 	}
-	ws.setPrintArea(1, 1, row-1, col-1);
-	wb.write(`${query ? query : 'all'}.xlsx`, res);
+	const colCount = Object.keys(objects[0]).length;
+	// console.log(colCount);
+	// console.log(row-1 || 1, col-1 || colCount);
+	// console.log('------------------');
+	ws.setPrintArea(1, 1, row-1 ? row-1 : 1, col-1 ? col-1 : colCount);
+	wb.write(`${name}.xlsx`, res);
 }
 
 module.exports = exportToExcel;

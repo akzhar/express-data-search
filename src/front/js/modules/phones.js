@@ -20,7 +20,7 @@
 		render.showLoadingMsg();
 		utils.debounce(retrieveResults)();
 		if (nodes.searchValueInput.value) {
-			nodes.exportBtn.href = `/phones/excel?q=${nodes.searchValueInput.value}`;
+			nodes.exportBtn.href = `/phones/excel?q=${encodeURIComponent(nodes.searchValueInput.value)}`;
 			nodes.exportBtn.title = 'Экспорт в Excel: только результаты запроса';
 		}
 	};

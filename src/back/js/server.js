@@ -207,7 +207,8 @@ function serverRun() {
 	// http://ru-kom1-w171:3000/phones/excel
 	server.get('/phones/excel', (req, res) => {
 		const {q} = req.query;
-		const request = http.get(`http://ru-kom1-w171:3004/phones${q ? `?q=${q}` : ''}`);
+		const url = `http://ru-kom1-w171:3004/phones${q ? `?q=${q}` : ''}`;
+		const request = http.get(url);
 		let jsonStr = '';
 		request.once('response', (response) => {
 			if (response.statusCode === 200) {
