@@ -54,9 +54,6 @@ function exportToExcel(objects, query, res, colsToExport = []) {
 		row++;
 	}
 	const colCount = Object.keys(objects[0]).length;
-	// console.log(colCount);
-	// console.log(row-1 || 1, col-1 || colCount);
-	// console.log('------------------');
 	ws.setPrintArea(1, 1, row-1 ? row-1 : 1, col-1 ? col-1 : colCount);
 	wb.write(`${name}.xlsx`, res);
 }

@@ -18,7 +18,8 @@ const log = require('./utils/log.js');
 const ip = require('./utils/ip.js');
 const exportToExcel = require('./utils/excel.js');
 
-const {PORT: port} = JSON.parse(fs.readFileSync('../.env.json', 'utf8'));
+const env = JSON.parse(fs.readFileSync('../.env.json', 'utf8'));
+const hostName = require('os').hostname();
 const FRONT_FILES_PATH = '../../front';
 const LDAP_FILTER = {
 	users: '(|(objectClass=user)(objectClass=person))',
@@ -207,7 +208,7 @@ function serverRun() {
 	// http://ru-kom1-w171:3000/phones/excel
 	server.get('/phones/excel', (req, res) => {
 		const {q} = req.query;
-		const url = `http://ru-kom1-w171:3004/phones${q ? `?q=${q}` : ''}`;
+		const url = `http://${hostName}:3004/phones${q ? `?q=${q}` : ''}`;
 		const request = http.get(url);
 		let jsonStr = '';
 		request.once('response', (response) => {
@@ -226,8 +227,8 @@ function serverRun() {
 		request.end();
 		log('Phones export to excel query');
 	});
-	server.listen(port);
-	log(`Server running at http://${ip}:${port}`);
+	server.listen(env.PORT);
+	log(`Server running at http://${ip}:${env.PORT}`);
 	log('===============================================================', false);
 }
 
