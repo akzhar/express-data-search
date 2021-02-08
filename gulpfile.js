@@ -92,7 +92,7 @@ lazyRequireTask('copyFonts', './gulp_tasks/copy.js', {
 }); 
 
 lazyRequireTask('copyOther', './gulp_tasks/copy.js', {
-	src: `${ADDRESS.source.root}*.{cmd,txt}`,
+	src: `${ADDRESS.source.root}*.cmd`,
 	dest: `${ADDRESS.build.root}`,
 	debugTitle: 'copy other files:',
 	taskName: 'copyOther'
@@ -116,7 +116,7 @@ lazyRequireTask('html', './gulp_tasks/html.js', {
 });
 
 lazyRequireTask('image', './gulp_tasks/image.js', {
-	src: `${ADDRESS.source.front.img}*.{png,jpg,jpeg,svg}`,
+	src: `${ADDRESS.source.front.img}*.{png,jpg,jpeg,svg,ico}`,
 	dest: `${ADDRESS.build.front.img}`
 });
 
