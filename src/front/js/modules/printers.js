@@ -1,10 +1,11 @@
 (function(){ // модуль активации эл-тов на стр printers
 	const utils = window.exports.utils;
+	const xhr = window.exports.xhr;
 	const render = window.exports.render;
 	const nodes = window.exports.nodes;
 
 	let pageName = undefined;
-	let data = undefined;
+	let printers = undefined;
 	let dataByPlant = undefined;
 
 	const retrieveResults = () => { // ф-ция делает запрос результата в массив данных
@@ -28,7 +29,7 @@
 	const addPlantSelectOptions = () => { // ф-ция подгружает выпадающий список опций в select выбора завода
 		utils.removeChilds(nodes.plantSelect);
 		const fieldName = 'Завод';
-		const items = utils.getUniqArrayByFieldname(data, fieldName);
+		const items = utils.getUniqArrayByFieldname(printers, fieldName);
 		items.forEach(item => {
 			addOption(nodes.plantSelect, item[fieldName]);
 		});
@@ -54,7 +55,7 @@
 
 	const filterDataByPlant = () => { // ф-ция фильтрует данные по выбранному заводу
 		const plantName = nodes.plantSelect.value;
-		dataByPlant = data.filter(elem => elem['Завод'] === plantName);
+		dataByPlant = printers.filter(elem => elem['Завод'] === plantName);
 	};
 
 	const onPlantSelectChange = () => { // ф-ция-обработчик изменения select выбора завода
@@ -75,19 +76,22 @@
 	};
 
 	const init = () => {
-		pageName = window.exports.pageName;
-		data = window.exports.data[pageName];
+		pageName = document.body.dataset.pagename;
 
-		nodes.plantSelect.addEventListener('change', onPlantSelectChange);
-		nodes.searchParamSelect.addEventListener('change', onParamSelectChange);
-		nodes.searchBtn.addEventListener('click', onSearchBtnClick);
-		window.addEventListener('keydown', (evt) => {
-			if(evt.key === 'Enter') onSearchBtnClick();
-		});
-		addPlantSelectOptions();
-		filterDataByPlant();
-		addSearchValueDatalistOptions();
-		nodes.searchValueInput.focus();
+		xhr.getRequest(`http://${window.location.hostname}:3004/${pageName}`, 'application/json', (data) => {
+			printers = JSON.parse(data);
+
+			nodes.plantSelect.addEventListener('change', onPlantSelectChange);
+			nodes.searchParamSelect.addEventListener('change', onParamSelectChange);
+			nodes.searchBtn.addEventListener('click', onSearchBtnClick);
+			window.addEventListener('keydown', (evt) => {
+				if(evt.key === 'Enter') onSearchBtnClick();
+			});
+			addPlantSelectOptions();
+			filterDataByPlant();
+			addSearchValueDatalistOptions();
+			nodes.searchValueInput.focus();
+		}).send();
 	};
 
 	window.exports.printers = { init }; 

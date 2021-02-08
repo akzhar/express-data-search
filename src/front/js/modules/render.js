@@ -50,7 +50,6 @@
 		if (contact[mobShort]) addProperty('Корпоративный мобильный номер (короткий)', utils.formatMobNoField(contact[mobShort]), item);
 		if (contact[internal]) addProperty('Внутренний стационарный номер', utils.formatDataField(contact[internal]), item);
 		if (contact[external]) addProperty('Городской стационарный номер', utils.formatDataField(contact[external]), item);
-		if (contact[dect]) addProperty('DECT / CISCO', utils.formatDataField(contact[dect]), item);
 		if (contact[fax]) addProperty('Факс', utils.formatDataField(contact[fax]), item);
 
 		if (contact[mobFull] || contact[mobShort]) {

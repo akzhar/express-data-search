@@ -1,5 +1,4 @@
 (function(){ // модуль активации эл-тов на стр phones
-	const CONFIG = window.exports.CONFIG;
 	const utils = window.exports.utils;
 	const xhr = window.exports.xhr;
 	const render = window.exports.render;
@@ -9,7 +8,7 @@
 
 	const retrieveResults = () => {
 		const dataToSearch = nodes.searchValueInput.value.toLowerCase();
-		xhr.getRequest(`http://${CONFIG.hostName}:3004/${pageName}${dataToSearch ? `?q=${encodeURIComponent(dataToSearch)}` : ''}`, 'application/json', (data) => {
+		xhr.getRequest(`http://${window.location.hostname}:3004/${pageName}${dataToSearch ? `?q=${encodeURIComponent(dataToSearch)}` : ''}`, 'application/json', (data) => {
 			const results = JSON.parse(data);
 			results.length ? render.printResults(results, pageName) : render.showEmptyMsg();
 			nodes.searchBtn.disabled = false;
@@ -27,7 +26,7 @@
 	};
 
 	const init = () => {
-		pageName = window.exports.pageName;
+		pageName = document.body.dataset.pagename;
 
 		nodes.searchBtn.addEventListener('click', onSearchBtnClick);
 		window.addEventListener('keydown', (evt) => {

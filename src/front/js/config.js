@@ -61,7 +61,6 @@
 				isColor: 'Цветной'
 			}
 		},
-		hostName: 'ru-kom1-w171',
 		qrSize: 500,
 		faceSad: '&#128557',
 		debounceInterval: 500,
