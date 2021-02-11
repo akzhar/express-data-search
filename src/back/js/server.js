@@ -180,7 +180,7 @@ function serverRun() {
 			} else if (!results) {
 				res.render('page-error', { error: 'Nothing was found' });
 			} else {
-				exportToExcel(results.other, query, res, ['cn', 'description', 'whenCreated']);
+				exportToExcel(results.other, query, res, null, ['cn', 'description', 'whenCreated']);
 			}
 		});
 		log(`Computers export to excel query: ${query}`);
@@ -215,7 +215,7 @@ function serverRun() {
 			if (response.statusCode === 200) {
 				response.on('data', (chunk) => { jsonStr += chunk; });
 				response.on('end', () => {
-					exportToExcel(JSON.parse(jsonStr), q, res);
+					exportToExcel(JSON.parse(jsonStr), q, res, 'Отдел');
 				});
 			} else {
 				log(`Caught exception\nExcel export query status code: ${response.statusCode}\nExcel export query status msg: ${response.statusMessage}`, true, true);

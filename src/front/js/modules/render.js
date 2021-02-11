@@ -100,7 +100,7 @@
 		if (pageName === 'printers') {
 			nodes.searchValueInput.value = '';
 		}
-		nodes.searchValueInput.focus();
+		// nodes.searchValueInput.focus(); // bug in IE (showed old options)
 	};
 
 	const getProperty = (HTMLcontent) => { // ф-ция возвращает свойство (строку в карточке результата)
